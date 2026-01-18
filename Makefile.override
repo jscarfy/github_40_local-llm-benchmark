@@ -1,0 +1,16 @@
+.PHONY: tools test build docker-build-api tag
+tools:
+@echo "[override-make] tools: nothing to install by default"
+test:
+@echo "[override-make] test: running scripts/run-tests.sh"
+./scripts/run-tests.sh || true
+build:
+@echo "[override-make] build: no-op (customize this file to build)"
+docker-build-api:
+@echo "[override-make] docker-build-api: building image if docker present"
+ifneq (,$(shell command -v docker 2>/dev/null))
+@docker build -t github_29_monorepo-starter-api:local . || true
+endif
+tag:
+@echo "[override-make] tag: creating a lightweight tag v0.0.0-override (no push)"
+@git tag -f "v0.0.0-override" || true

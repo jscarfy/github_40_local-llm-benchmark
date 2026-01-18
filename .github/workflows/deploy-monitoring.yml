@@ -1,0 +1,38 @@
+name: Continuous Deployment with Monitoring and Alerts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.18'
+
+    - name: Install dependencies
+      run: go mod tidy
+
+    - name: Run tests
+      run: go test ./...
+
+    - name: Build the application
+      run: go build -o diff-visualizer .
+
+    - name: Deploy to Production
+      run: |
+        echo "Deploying application..."
+        # Add deployment script here
+
+    - name: Send Monitoring Alert
+      run: |
+        echo "Sending monitoring alert..."
+        curl -X POST -H 'Content-Type: application/json' --data '{"text":"Deployment successful"}' https://slack.com/api/webhook

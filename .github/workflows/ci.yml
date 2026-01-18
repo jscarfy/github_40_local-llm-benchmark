@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v4
+        with:
+          go-version: "1.21"
+      - name: Tidy
+        run: go mod tidy
+      - name: Test
+        run: go test ./... -count=1
+      - name: Docker Build
+        run: docker build -t autogen:local .
+      - name: Docker Run
+        run: docker run --rm -p 8080:8080 autogen:local
+

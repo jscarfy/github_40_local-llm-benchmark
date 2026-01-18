@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
-ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-echo "ROOT: $ROOT"
-echo "---"
-echo "Paper:   $ROOT/build/paper.pdf"
-echo "Slides:  $ROOT/build/slides.pdf"
-echo "---"
-echo "Git:"
-git -C "$ROOT" status --porcelain || true
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+echo "=== repo ==="
+echo "root: $ROOT"
+echo "branch: $(git branch --show-current || true)"
+echo
+echo "=== git status ==="
+git status -sb || true
+echo
+echo "=== untracked (top) ==="
+git ls-files --others --exclude-standard | sed -n '1,120p' || true

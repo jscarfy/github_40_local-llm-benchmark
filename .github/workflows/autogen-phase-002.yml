@@ -1,0 +1,19 @@
+name: Autogen Phase 2
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: "1.21"
+      - name: Build
+        run: |
+          if [[ -f go.mod ]]; then
+            go test ./... -count=1
+          else
+            echo "No go.mod found; skipping go build/test."
+          fi

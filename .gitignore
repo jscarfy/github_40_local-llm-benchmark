@@ -1,0 +1,16 @@
+# Deny-by-default (prevents accidentally tracking $HOME)
+*
+
+# Allow only the project surface
+!.gitignore
+!.gitattributes
+!README.md
+!LICENSE
+!scripts/**
+!amsart/**
+!beamer/**
+!build/**
+
+# Extra safety
+.DS_Store
+.yang_autogen/

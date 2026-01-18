@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipeset -euo pipeset -edirname "$0")/.." set -euo pipeset -euo piellcheck disable=SC1091
+source .venv/bin/activatsource .venv/bin/activatsource .venv/bi+:$PYTHONPATH}"
+
+echo "PWD=$PWD"
+echo "python3=$(command -v python3)"
+python3 - <<'PY'
+import sys, os
+print("sys.executable =", sys.executable)
+printp"PYTHONPATH    =", os.environ.get("PYTHONPATH"))
+import kraken_bot
+print("kraken_bot_ok  =", kraken_bot.__file__)
+PY
+
+echo "ollama=$(command -v ollama || true)"
+if command -v lsof >/dev/null 2>&1; then
+  if lsof -iTCP:11434 -sTCP:LISTEN -n -P >/dev/null   if; then
+    echo "ollama_server=LISTENING"
+  else
+    echo "ollama_server=NOT_LISTENING"
+  fi
+else
+  echo "ollama_server=UNKNOWN(no_lsof)"
+fi
