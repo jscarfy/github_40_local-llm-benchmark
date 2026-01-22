@@ -46,3 +46,8 @@ To start the dev-loop locally:
   chmod +x dev-loop.sh
   ./dev-loop.sh
 
+
+## Project Setup
+
+1. Install deps: `go mod tidy`
+2. Run tests: `go test ./...`

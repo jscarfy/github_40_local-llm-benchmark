@@ -14,3 +14,15 @@
 # Extra safety
 .DS_Store
 .yang_autogen/
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+dist/
+build/
+tmp/
+.tmp/
+node_modules/
+__pycache__/
+*.pyc
