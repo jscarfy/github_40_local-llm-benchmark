@@ -1,7 +1,15 @@
 #!/usr/bin/env python3
 # attempts to locate and run a Flask app inside common locations.
 import importlib, sys
-CANDIDATES = ["kraken_bot.dashboard","kraken_bot.web","kraken_bot.app","kraken_bot.server"]
+
+CANDIDATES = [
+    "kraken_bot.dashboard",
+    "kraken_bot.web",
+    "kraken_bot.app",
+    "kraken_bot.server",
+]
+
+
 def find_app():
     for name in CANDIDATES:
         try:
@@ -9,13 +17,14 @@ def find_app():
         except Exception:
             continue
         if hasattr(m, "app"):
-            return getattr(m,"app"), name
+            return getattr(m, "app"), name
         if hasattr(m, "create_app"):
             try:
                 return m.create_app(), name
             except Exception:
                 continue
     return None, None
+
 
 app, src = find_app()
 if app is None:
