@@ -1,12 +1,23 @@
 #!/usr/bin/env bash
 set -euo pipefail
-# Run this in a terminal YOU control. Ctrl-C to stop.
-if [ ! -x "./scripts/autogen_once.sh" ]; then
-  echo "ERROR: ./scripts/autogen_once.sh missing or not executable"
-  exit 2
-fi
-echo "[autogen_loop] starting; Ctrl-C to stop"
+ROOT="${ROOT:-$HOME/cgpt_autogen}"
+SCRIPTS="${SCRIPTS:-$ROOT/scripts}"
+STATE="${STATE:-$ROOT/state}"
+source "$SCRIPTS/common.sh"
+
+interval="${1:-1}"
+mkdir -p "$STATE"
+
+echo "autogen_loop: running (interval=${interval}s). Ctrl+C to stop."
+trap 'echo "autogen_loop: stopped."; exit 0' INT
+
 while true; do
-  ./scripts/autogen_once.sh || true
-  sleep 1
+  if out="$("$SCRIPTS/autogen_step.sh" 2>/dev/null)"; then
+    if [ -n "$out" ]; then
+      echo "autogen_loop: payload materialized -> $out"
+    fi
+  else
+    :
+  fi
+  sleep "$interval"
 done
