@@ -32,3 +32,9 @@ OneDrive*/
 Dropbox/
 Google Drive/
 .GCACHES/
+# Common cloud storage fragments (avoid accidentally committing mount artifacts)
+Library/CloudStorage/
+OneDrive*/
+Dropbox/
+Google Drive/
+.GCACHES/
