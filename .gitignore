@@ -26,3 +26,9 @@ tmp/
 node_modules/
 __pycache__/
 *.pyc
+# Common cloud storage fragments (avoid accidentally committing mount artifacts)
+Library/CloudStorage/
+OneDrive*/
+Dropbox/
+Google Drive/
+.GCACHES/
