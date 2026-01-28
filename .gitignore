@@ -38,3 +38,7 @@ OneDrive*/
 Dropbox/
 Google Drive/
 .GCACHES/
+# --- vuln-watch local artifacts ---
+*.bak.*
+*.log
+.evo_sanitize_backup_*/
