@@ -42,3 +42,10 @@ Google Drive/
 *.bak.*
 *.log
 .evo_sanitize_backup_*/
+/logs/
+/scrapes/
+/backups/
+/queue/urls.pending
+queue/urls.failed
+*.tmp
+dev-loop.log
